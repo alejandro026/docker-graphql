@@ -36,11 +36,13 @@ jobs:
     - name: Docker Build Image
       env: 
         NEW_VERSION: ${{ steps.version.outputs.version }}
-
       run: |
         docker build -t alejandro026/docker-graphql:${NEW_VERSION} .
         docker build -t alejandro026/docker-graphql:latest .
+        
     - name: Docker Push Image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker push alejandro026/docker-graphql:${NEW_VERSION}
         docker push alejandro026/docker-graphql:latest
